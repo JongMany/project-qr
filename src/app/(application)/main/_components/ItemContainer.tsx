@@ -1,6 +1,7 @@
 "use client";
 import Item from "@/app/(application)/main/_components/Item";
-import React, { useReducer, useState } from "react";
+import { useItemStore } from "@/stores/useItemStore";
+import React, { useEffect, useReducer, useState } from "react";
 
 const fakeItems = [
   {
@@ -59,15 +60,21 @@ const itemReducer = (state: typeof fakeItems, action: any) => {
 };
 
 export default function ItemContainer() {
-  const [items, dispatch] = useReducer(itemReducer, fakeItems);
-  const deleteItemById = (id: number) => {
-    dispatch({ type: "REMOVE_ITEM", id });
-  };
+  // const [items, dispatch] = useReducer(itemReducer, fakeItems);
+  // const deleteItemById = (id: number) => {
+  //   dispatch({ type: "REMOVE_ITEM", id });
+  // };
+
+  const { dispatch, items } = useItemStore();
+
+  useEffect(() => {
+    dispatch({ type: "setItems", payload: fakeItems });
+  }, [dispatch]);
 
   return (
     <section className="max-h-[78vh] overflow-y-scroll scrollbar-hide flex flex-col items-center pb-4">
       {items.map((item) => (
-        <Item key={item.id} item={item} deleteItemById={deleteItemById} />
+        <Item key={item.id} item={item} />
       ))}
     </section>
   );
