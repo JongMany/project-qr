@@ -8,14 +8,14 @@ const fakeItems: ItemEntity[] = [
     imageUrl: "https://via.placeholder.com/100",
     name: "요구르트",
     category: "식품(유제품)",
-    expirationDate: "2024-5-10",
+    expirationDate: "2024-05-10",
   },
   {
     id: "2",
     imageUrl: "https://via.placeholder.com/100",
     name: "라면",
     category: "식품(가공식품)",
-    expirationDate: "2025-5-12",
+    expirationDate: "2025-05-12",
   },
   {
     id: "3",
