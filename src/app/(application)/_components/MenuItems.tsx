@@ -9,7 +9,7 @@ export default function MenuItems() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 flex px-6 py-2 w-full bg-[#F9F9F9] text-[22px] justify-around">
+    <nav className="fixed bottom-0 flex px-6 py-2 w-full bg-[#F9F9F9] text-[22px] justify-around max-h-[10vh] h-[10vh]">
       <div className={`${pathname.includes("main") ? active : inactive}`}>
         <Link
           href="/main"

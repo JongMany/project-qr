@@ -1,6 +1,7 @@
 "use client";
 
-import QRScanner from "@/app/tutorial/_components/QRScanner";
+import QRScanner from "@/components/QRScanner";
+// import QRScanner from "@/app/tutorial/_components/QRScanner";
 import { useQRCode } from "next-qrcode";
 
 // export default function ScanPanel() {

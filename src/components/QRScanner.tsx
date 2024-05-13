@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useRef, useState } from "react";
 
@@ -6,9 +7,13 @@ import "./QrStyles.css";
 
 // Qr Scanner
 import QrScanner from "qr-scanner";
-// import QrFrame from "@/assets/qr-frame.svg";
+import { debounce } from "lodash";
 
-const QRScanner = () => {
+type Props = {
+  onActionAfterScan?: (args: any) => void;
+};
+
+const QRScanner = ({ onActionAfterScan }: Props) => {
   // QR States
   const scanner = useRef<QrScanner>();
   const videoEl = useRef<HTMLVideoElement>(null);
@@ -16,16 +21,24 @@ const QRScanner = () => {
   const [qrOn, setQrOn] = useState<boolean>(true);
 
   // Result
-  const [scannedResult, setScannedResult] = useState<string | undefined>("");
+  const [scannedResult, setScannedResult] = useState<string | null>(null);
 
   // Success
-  const onScanSuccess = (result: QrScanner.ScanResult) => {
-    // 🖨 Print the "result" to browser console.
-    console.log(result);
-    // ✅ Handle success.
-    // 😎 You can do whatever you want with the scanned result.
-    setScannedResult(result?.data);
-  };
+  const onScanSuccess = debounce((result: QrScanner.ScanResult) => {
+    if (result.data) {
+      setScannedResult(result.data);
+      onActionAfterScan?.(result.data);
+    }
+  }, 300);
+  // const onScanSuccess = (result: QrScanner.ScanResult) => {
+  //   // 🖨 Print the "result" to browser console.
+  //   // console.log(result);
+  //   // ✅ Handle success.
+  //   // 😎 You can do whatever you want with the scanned result.
+  //   if (result.data) {
+  //     setScannedResult(result.data);
+  //   }
+  // };
 
   // Fail
   const onScanFail = (err: string | Error) => {
@@ -89,7 +102,7 @@ const QRScanner = () => {
       </div>
 
       {/* Show Data Result if scan is success */}
-      {scannedResult && (
+      {
         <p
           style={{
             position: "absolute",
@@ -99,9 +112,10 @@ const QRScanner = () => {
             color: "white",
           }}
         >
-          Scanned Result: {scannedResult}
+          Scanned Result:{" "}
+          {scannedResult ? scannedResult : "No QR Code Detected"}
         </p>
-      )}
+      }
     </div>
   );
 };

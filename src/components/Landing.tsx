@@ -28,7 +28,7 @@ export default function Landing() {
     return () => {
       interval.current && clearInterval(interval.current);
     };
-  }, [progress]);
+  }, [progress, router]);
 
   const dynamicWidthStyle = (percentage: number) => {
     return `w-[${percentage}%]`;

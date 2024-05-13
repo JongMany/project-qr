@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 
 // Styles
-import "./QrStyles.css";
+// import "./QrStyles.css";
 
 // Qr Scanner
 import QrScanner from "qr-scanner";

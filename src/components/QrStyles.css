@@ -25,7 +25,7 @@
 }
 
 /* Media Queries for mobile screens */
-@media (max-width: 426px) {
+@media (max-width: 316px) {
   .qr-reader {
     width: 100%;
   }
