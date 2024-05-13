@@ -25,7 +25,9 @@ export default function Landing() {
       });
     }, 25);
 
-    return () => interval.current && clearInterval(interval.current);
+    return () => {
+      interval.current && clearInterval(interval.current);
+    };
   }, [progress]);
 
   const dynamicWidthStyle = (percentage: number) => {
