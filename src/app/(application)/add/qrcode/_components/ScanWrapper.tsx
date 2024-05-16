@@ -29,7 +29,11 @@ export default function ScanWrapper() {
       {!showInfoModal && (
         <div className="flex flex-col justify-center items-center w-full min-h-[70vh]">
           <QRScanner onActionAfterScan={actionAfterScanSuccess} />
-          <Link replace href={"/add/product"}>
+          <Link
+            replace
+            href={"/add/product"}
+            className="mt-10 py-1 rounded-xl w-[250px] bg-black text-white text-center"
+          >
             뒤로가기
           </Link>
         </div>

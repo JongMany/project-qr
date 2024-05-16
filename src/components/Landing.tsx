@@ -16,8 +16,13 @@ export default function Landing() {
         prevProgress.current = prev;
         if (prevProgress.current >= 100) {
           interval.current && clearInterval(interval.current);
+          const user = localStorage.getItem("user");
           setTimeout(() => {
-            router.replace("/main");
+            if (user) {
+              router.replace("/main");
+            } else {
+              router.replace("/login");
+            }
           }, 300);
           return 100;
         }

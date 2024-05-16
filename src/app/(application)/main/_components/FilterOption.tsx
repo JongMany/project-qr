@@ -16,7 +16,7 @@ export default function FilterOption() {
   };
 
   return (
-    <nav className="min-h-[6vh] flex gap-x-5 px-4 items-center">
+    <nav className="min-h-[4vh] flex gap-x-5 px-4 items-center">
       <div>
         <button
           name="sort"

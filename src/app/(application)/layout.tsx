@@ -1,4 +1,5 @@
 import MenuItems from "@/app/(application)/_components/MenuItems";
+import { Toaster } from "react-hot-toast";
 
 export default function ApplicationLayout({
   children,
@@ -9,6 +10,7 @@ export default function ApplicationLayout({
     <main>
       {children}
       <MenuItems />
+      <Toaster position="bottom-center" />
     </main>
   );
 }
