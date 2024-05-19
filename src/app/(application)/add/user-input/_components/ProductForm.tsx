@@ -1,13 +1,12 @@
 "use client";
 import { Category, Item, ItemForm, categoryOptions } from "@/entity/Item";
-import React, { useState } from "react";
+import { useItemStore } from "@/stores/useItemStore";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-type Props = {
-  submitProduct: (formData: FormData) => Promise<void>;
-};
-export default function ProductForm() {
-  const [errorMsg, setErrorMsg] = useState("");
 
+export default function ProductForm() {
+  const { dispatch } = useItemStore();
+  const router = useRouter();
   const submitProduct = async (formData: FormData) => {
     const form: Item = {
       name: formData.get("productName") as string,
@@ -24,6 +23,16 @@ export default function ProductForm() {
       toast.error(errorMsg);
     } else {
       const image = formData.get("image") as File;
+      dispatch({
+        type: "registerItem",
+        payload: {
+          id: Math.random(),
+          ...form,
+          imageUrl: "https://via.placeholder.com/100",
+          // imageUrl: image ? URL.createObjectURL(image) : "https://via.placeholder.com/100",
+        },
+      });
+      router.replace("/main");
       // Cloudinary에 저장 후에 URL을 받아옴
 
       // 데이터 추가하는 로직 구현
