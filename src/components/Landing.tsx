@@ -18,11 +18,11 @@ export default function Landing() {
           interval.current && clearInterval(interval.current);
           const user = localStorage.getItem("user");
           setTimeout(() => {
-            if (user) {
-              router.replace("/main");
-            } else {
-              router.replace("/login");
-            }
+            // if (user) {
+            //   router.replace("/main");
+            // } else {
+            //   router.replace("/login");
+            // }
           }, 300);
           return 100;
         }
@@ -39,18 +39,29 @@ export default function Landing() {
     return `w-[${percentage}%]`;
   };
 
+  let fontColor;
+  if (progress < 30) {
+    fontColor = "text-green-300";
+  } else if (progress < 60) {
+    fontColor = "text-green-500";
+  } else {
+    fontColor = "text-green-700";
+  }
+
   return (
-    <div>
-      <div className="w-[300px] h-[20px] relative">
-        <div className="w-[300px] h-full absolute bg-blue-400"></div>
+    <div className="mt-4">
+      <div className="w-[300px] h-[30px] relative">
+        <div className="w-[300px] h-full absolute bg-green-300"></div>
         <div
           style={{
             width: `${progress}%`,
           }}
-          className={`h-full absolute bg-blue-800`}
+          className={`h-full absolute bg-green-700`}
         ></div>
       </div>
-      <div>{progress}%</div>
+      <div className={`flex justify-center text-bold text-2xl ${fontColor}`}>
+        {progress}%
+      </div>
     </div>
   );
 }
