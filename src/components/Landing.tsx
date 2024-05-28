@@ -18,11 +18,11 @@ export default function Landing() {
           interval.current && clearInterval(interval.current);
           const user = localStorage.getItem("user");
           setTimeout(() => {
-            // if (user) {
-            //   router.replace("/main");
-            // } else {
-            //   router.replace("/login");
-            // }
+            if (user) {
+              router.replace("/main");
+            } else {
+              router.replace("/login");
+            }
           }, 300);
           return 100;
         }
