@@ -57,6 +57,7 @@ export default function Page() {
         카테고리 설정
       </h2>
       <CategorySetting />
+      
     </div>
   );
 }

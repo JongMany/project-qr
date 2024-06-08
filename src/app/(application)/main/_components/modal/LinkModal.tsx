@@ -22,7 +22,7 @@ export default function LinkModal({ closeModal, item }: Props) {
       let url = ``;
       if (item.restDays > 3) {
         url = `https://www.google.com/search?q=${item.name} 활용 방법, 꿀팁`;
-      } else if (item.restDays === 0) {
+      } else if (item.restDays <= 0) {
         url = `https://www.google.com/search?q=${item.name} 폐기 방법`;
       } else {
         url = `https://www.google.com/search?q=${item.name} 활용 방법, 꿀팁`;
