@@ -52,7 +52,10 @@ export default function Page() {
       </div>
       <SaveButton />
 
-      <h2>카테고리 설정</h2>
+      <hr className="border-2 w-[80vw] mt-12" />
+      <h2 className="px-6 pt-12 font-semibold text-[22px] text-center mb-6">
+        카테고리 설정
+      </h2>
       <CategorySetting />
     </div>
   );
