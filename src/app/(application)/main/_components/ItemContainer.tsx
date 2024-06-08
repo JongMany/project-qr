@@ -16,7 +16,7 @@ export default function ItemContainer() {
     ),
     query.trim()
   );
-  
+
   console.log(items, result, categoryFilter);
   return (
     <section className="h-[77vh] overflow-y-scroll scrollbar-hide flex flex-col items-center pb-4">

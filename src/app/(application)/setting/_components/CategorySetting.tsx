@@ -1,4 +1,5 @@
 "use client";
+import DeleteItemModal from "@/app/(application)/main/_components/modal/DeleteItemModal";
 import { categoryOptions } from "@/entity/Item";
 import { useModal } from "@/libs/useModal";
 import { useCategoryStore } from "@/stores/useCategoryStore";
@@ -8,7 +9,7 @@ export default function CategorySetting() {
   const [value, setValue] = useState("");
   const { category, addCategory, deleteCategory } = useCategoryStore();
   const defaultCategory = categoryOptions.map((option) => option.id);
-  const {} = useModal();
+  const { closeModal, isOpen, openModal } = useModal();
 
   return (
     <div>
@@ -22,13 +23,23 @@ export default function CategorySetting() {
             {defaultCategory.includes(category.id) ? null : (
               <span>
                 <button
-                  onClick={() => {
-                    deleteCategory({ value: category.value, id: category.id });
-                  }}
+                  onClick={openModal}
                   className="bg-red-500 text-white px-2 rounded-md"
                 >
                   삭제
                 </button>
+                {isOpen && (
+                  <DeleteItemModal
+                    closeModal={closeModal}
+                    deleteItem={() => {
+                      deleteCategory({
+                        value: category.value,
+                        id: category.id,
+                      });
+                      closeModal();
+                    }}
+                  />
+                )}
               </span>
             )}
           </li>
