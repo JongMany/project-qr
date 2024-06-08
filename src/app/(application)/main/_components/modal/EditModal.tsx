@@ -1,4 +1,5 @@
 import { ItemEntity, categoryOptions } from "@/entity/Item";
+import { useCategoryStore } from "@/stores/useCategoryStore";
 import { useItemStore } from "@/stores/useItemStore";
 import dayjs from "dayjs";
 import { ChangeEvent, useState } from "react";
@@ -13,6 +14,8 @@ export default function EditModal({ closeModal, itemId }: Props) {
   const [selectedItem, setSelectedItem] = useState(() =>
     items.find((item) => item.id === itemId)
   );
+
+  const { category } = useCategoryStore();
 
   const editItem = () => {
     console.log(selectedItem);
@@ -44,7 +47,8 @@ export default function EditModal({ closeModal, itemId }: Props) {
           onChange={onChange}
           name="category"
         >
-          {categoryOptions.map((option) => (
+          {/* {categoryOptions.map((option) => ( */}
+          {category.map((option) => (
             <option key={option.id} value={option.value}>
               {option.value}
             </option>

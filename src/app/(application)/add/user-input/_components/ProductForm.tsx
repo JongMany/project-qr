@@ -1,11 +1,13 @@
 "use client";
 import { Category, Item, ItemForm, categoryOptions } from "@/entity/Item";
+import { useCategoryStore } from "@/stores/useCategoryStore";
 import { useItemStore } from "@/stores/useItemStore";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function ProductForm() {
   const { dispatch } = useItemStore();
+  const { category } = useCategoryStore();
   const router = useRouter();
   const submitProduct = async (formData: FormData) => {
     const form: Item = {
@@ -68,7 +70,8 @@ export default function ProductForm() {
             name="category"
             className="border-2 rounded-md border-gray-300 h-[30px] px-2 py-1"
           >
-            {categoryOptions.map((category) => (
+            {/* {categoryOptions.map((category) => ( */}
+            {category.map((category) => (
               <option key={category.id} value={category.value}>
                 {category.value}
               </option>

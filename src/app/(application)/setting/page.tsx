@@ -1,3 +1,4 @@
+import CategorySetting from "@/app/(application)/setting/_components/CategorySetting";
 import SaveButton from "@/app/(application)/setting/_components/SaveButton";
 
 export default function Page() {
@@ -50,6 +51,9 @@ export default function Page() {
         </div>
       </div>
       <SaveButton />
+
+      <h2>카테고리 설정</h2>
+      <CategorySetting />
     </div>
   );
 }

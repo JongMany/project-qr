@@ -1,6 +1,7 @@
 // https://velog.io/@hyungeol94/TypeScript%EB%A1%9C-Zustand-Reducer%EB%A5%BC-%ED%83%80%EC%9D%B4%ED%95%91%ED%95%98%EA%B3%A0-%EC%82%AC%EC%9A%A9%ED%95%B4-%EB%B3%B4%EA%B8%B0
 import { Category, ItemEntity } from "@/entity/Item";
-import { create } from "zustand";
+import { StateCreator, create } from "zustand";
+import { PersistOptions, persist } from "zustand/middleware";
 
 const fakeItems: ItemEntity[] = [
   {
@@ -100,16 +101,30 @@ const itemReducer = (state: State, action: DispatchedAction) => {
   }
 };
 
-export const useItemStore = create<State & Action>((set) => ({
-  items: [...fakeItems],
-  expirationSortOption: "descending",
-  categoryFilter: "전체",
-  dispatch: (action) => set((state) => itemReducer(state, action)),
-  toggleExpirationSortOption: () =>
-    set((state) => ({
-      expirationSortOption:
-        state.expirationSortOption === "ascending" ? "descending" : "ascending",
-    })),
-  selectCategoryFilter: (category: Category | "전체") =>
-    set({ categoryFilter: category }),
-}));
+export const useItemStore = create<State & Action>(
+  (
+    persist as (
+      config: StateCreator<State & Action>,
+      options: PersistOptions<State & Action>
+    ) => StateCreator<State & Action>
+  )(
+    (set) => ({
+      items: [...fakeItems],
+      expirationSortOption: "descending",
+      categoryFilter: "전체",
+      dispatch: (action) => set((state) => itemReducer(state, action)),
+      toggleExpirationSortOption: () =>
+        set((state) => ({
+          expirationSortOption:
+            state.expirationSortOption === "ascending"
+              ? "descending"
+              : "ascending",
+        })),
+      selectCategoryFilter: (category: Category | "전체") =>
+        set({ categoryFilter: category }),
+    }),
+    {
+      name: "item-storage",
+    }
+  )
+);

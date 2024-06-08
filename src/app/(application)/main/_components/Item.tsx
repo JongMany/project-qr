@@ -1,9 +1,11 @@
 import DeleteItemModal from "@/app/(application)/main/_components/modal/DeleteItemModal";
 import EditModal from "@/app/(application)/main/_components/modal/EditModal";
+import LinkModal from "@/app/(application)/main/_components/modal/LinkModal";
 import { ItemEntity } from "@/entity/Item";
 import { useItemStore } from "@/stores/useItemStore";
 import { differenceInCalendarDays } from "date-fns";
 import { useState } from "react";
+import { BiSolidHelpCircle } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 
@@ -11,7 +13,7 @@ type Props = {
   item: ItemEntity;
 };
 
-type ModalTypes = "delete" | "edit" | "none";
+type ModalTypes = "delete" | "edit" | "none" | "link";
 
 export default function Item({ item }: Props) {
   const { dispatch } = useItemStore();
@@ -36,6 +38,9 @@ export default function Item({ item }: Props) {
     closeModal();
   };
 
+  const show = () => {
+    setShowModal("link");
+  };
   return (
     <>
       <article
@@ -53,7 +58,7 @@ export default function Item({ item }: Props) {
             <span>남은 유통기한:</span>
             <span className={stylesAboutRestDays}>{restDays}일</span>
           </div>
-          <div className="text-[13px] absolute right-2 top-2 flex gap-x-1">
+          <div className="text-[18px] absolute right-2 top-2 flex gap-x-1">
             <button
               // className="text-[12px] absolute right-2 top-2"
               onClick={showDeleteModal}
@@ -66,6 +71,12 @@ export default function Item({ item }: Props) {
             >
               <FiEdit />
             </button>
+            <button
+              // className="text-[12px] absolute right-2 top-2"
+              onClick={show}
+            >
+              <BiSolidHelpCircle />
+            </button>
           </div>
         </div>
       </article>
@@ -74,6 +85,16 @@ export default function Item({ item }: Props) {
       )}
       {showModal === "edit" && (
         <EditModal closeModal={closeModal} itemId={item.id} />
+      )}
+      {showModal === "link" && (
+        <LinkModal
+          closeModal={closeModal}
+          item={{
+            name: item.name,
+            restDays: restDays,
+            restDayStyle: stylesAboutRestDays,
+          }}
+        />
       )}
     </>
   );

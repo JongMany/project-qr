@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useSelectedLayoutSegments } from "next/navigation";
+import { FaCalendarCheck } from "react-icons/fa";
 import { IoIosSettings, IoMdAddCircleOutline, IoMdHome } from "react-icons/io";
 
 const active = "text-red-500 fill-red-500";
@@ -30,6 +31,17 @@ export default function MenuItems() {
             <IoMdAddCircleOutline />
           </span>
           <span>추가</span>
+        </Link>
+      </div>
+      <div className={`${pathname.includes("calendar") ? active : inactive}`}>
+        <Link
+          href={"/calendar"}
+          className=" flex flex-col items-center justify-center"
+        >
+          <span>
+            <FaCalendarCheck />
+          </span>
+          <span>캘린더</span>
         </Link>
       </div>
       <div className={`${pathname.includes("setting") ? active : inactive} `}>
